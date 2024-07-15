@@ -28,7 +28,7 @@ class DashboardController extends GetxController {
       response.value = event;
       receivedBytes.value += event.length;
       latency.value = DateTime.now().difference(packetSendDate).inMilliseconds;
-      speed.value = 60000 / latency.value;
+      speed.value = 60000 / (latency.value > 0 ? latency.value : 1);
 
       if (latency.value > highestLatency.value) {
         highestLatency.value = latency.value;

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:polling_client/utils/navigation.dart';
@@ -7,7 +9,9 @@ import 'package:wakelock/wakelock.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Wakelock.enable();
+  if (Platform.isAndroid) {
+    await Wakelock.enable();
+  }
 
   runApp(const App());
 }
