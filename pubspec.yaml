@@ -40,6 +40,7 @@ dependencies:
   bonsoir: ^5.1.9
   lorem_ipsum: ^0.0.3
   wakelock: ^0.6.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

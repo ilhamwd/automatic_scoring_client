@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -14,6 +13,7 @@ class DashboardController extends GetxController {
   RxDouble speed = 0.0.obs;
   RxDouble highestSpeed = 0.0.obs;
   RxDouble lowestSpeed = 0.0.obs;
+  RxInt receivedBytes = 0.obs;
   RxBool isBenchmarking = false.obs;
   DateTime packetSendDate = DateTime.now();
   Rx<Uint8List?> response = Rx<Uint8List?>(null);
@@ -26,6 +26,7 @@ class DashboardController extends GetxController {
 
     _resultListener = server.listen((event) {
       response.value = event;
+      receivedBytes.value += event.length;
       latency.value = DateTime.now().difference(packetSendDate).inMilliseconds;
       speed.value = 60000 / latency.value;
 

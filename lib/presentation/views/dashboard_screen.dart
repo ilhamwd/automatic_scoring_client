@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:polling_client/presentation/controllers/dashboard_controller.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
@@ -42,13 +43,20 @@ class DashboardScreen extends GetView<DashboardController> {
                         const SizedBox(height: 5),
                         Text(
                             "${controller.highestSpeed.value.round()} message/minute highest speed"),
-                        if (controller.response.value != null) ...[
-                          const SizedBox(height: 5),
-                          const Text("Image Response"),
-                          const SizedBox(height: 10),
-                          Image.memory(controller.response.value!,
-                              width: 250, height: 250)
-                        ]
+                        const SizedBox(height: 5),
+                        Text(
+                            "Received ${NumberFormat("#,###").format(controller.receivedBytes.value / 1000000)} megabytes"),
+                      ],
+                      if (controller.response.value != null) ...[
+                        const SizedBox(height: 5),
+                        const Text("Image Response"),
+                        const SizedBox(height: 10),
+                        Image.memory(
+                          controller.response.value!,
+                          width: 250,
+                          height: 250,
+                          fit: BoxFit.cover,
+                        )
                       ]
                     ],
                   );
